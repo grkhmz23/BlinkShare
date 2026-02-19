@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" rx="32" fill="#12121a"/>
+  <circle cx="100" cy="90" r="40" fill="none" stroke="#6c5ce7" stroke-width="4"/>
+  <path d="M80 85 L95 100 L120 75" stroke="#00b894" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="100" y="155" text-anchor="middle" font-family="monospace" font-size="18" font-weight="700" fill="#e4e4f0">BlinkShare</text>
+</svg>

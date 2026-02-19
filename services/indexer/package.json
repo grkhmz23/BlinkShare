@@ -1,0 +1,23 @@
+{
+  "name": "@blinkshare/indexer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts"
+  },
+  "dependencies": {
+    "@blinkshare/common": "workspace:*",
+    "@prisma/client": "^6.3.0",
+    "@solana/web3.js": "^1.98.0",
+    "ws": "^8.18.0",
+    "dotenv": "^16.4.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/ws": "^8.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

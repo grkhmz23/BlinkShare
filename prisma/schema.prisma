@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Profile {
+  id              String        @id @default(cuid())
+  walletAddress   String        @unique
+  tapestryId      String?       @unique
+  username        String?       @unique
+  displayName     String?
+  bio             String?
+  avatarUrl       String?
+  karma           Int           @default(0)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  endorsementsReceived Endorsement[] @relation("EndorsementsReceived")
+  endorsementsGiven    Endorsement[] @relation("EndorsementsGiven")
+}
+
+model Endorsement {
+  id            String   @id @default(cuid())
+  txSignature   String   @unique
+  fromWallet    String
+  toProfileId   String
+  nonce         String
+  memo          String
+  lamports      Int      @default(0)
+  status        String   @default("pending") // pending | verified | failed
+  tapestryEventId String?
+  createdAt     DateTime @default(now())
+  verifiedAt    DateTime?
+
+  toProfile     Profile  @relation("EndorsementsReceived", fields: [toProfileId], references: [id])
+  fromProfile   Profile? @relation("EndorsementsGiven", fields: [fromWallet], references: [walletAddress])
+}

@@ -1,0 +1,29 @@
+{
+  "name": "blinkshare-tapestry-orbitflare",
+  "private": true,
+  "scripts": {
+    "dev": "pnpm --filter @blinkshare/web dev",
+    "build": "pnpm --filter @blinkshare/web build",
+    "indexer": "pnpm --filter @blinkshare/indexer start",
+    "indexer:dev": "pnpm --filter @blinkshare/indexer dev",
+    "db:migrate": "prisma migrate dev --schema=prisma/schema.prisma",
+    "db:push": "prisma db push --schema=prisma/schema.prisma",
+    "db:studio": "prisma studio --schema=prisma/schema.prisma",
+    "db:generate": "prisma generate --schema=prisma/schema.prisma",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "postinstall": "prisma generate --schema=prisma/schema.prisma"
+  },
+  "devDependencies": {
+    "prisma": "^6.3.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.3.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@9.15.0"
+}
