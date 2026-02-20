@@ -105,7 +105,7 @@ export default function GenerateBlinkPage() {
               <label className="text-xs uppercase tracking-widest font-[var(--font-mono)] text-zinc-400 mb-2 block">
                 Action Paradigm
               </label>
-              <div className="flex p-1.5 bg-[var(--color-bg-base)] rounded-xl border border-white/5">
+              <div className="flex p-1.5 bg-[#030305] rounded-xl border border-white/5">
                 {tabs.map((tab) => (
                   <button
                     key={tab.id}
@@ -172,10 +172,10 @@ export default function GenerateBlinkPage() {
                 animate={{ opacity: 1, height: "auto", scale: 1 }}
                 className="relative rounded-2xl p-px overflow-hidden"
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-accent)]/50 to-[var(--color-gold)]/50 blur-sm pointer-events-none" />
-                <div className="relative bg-[var(--color-bg-surface)] rounded-2xl p-6 border border-white/10 backdrop-blur-2xl">
-                  <div className="flex items-center gap-3 mb-6 text-[var(--color-gold-light)]">
-                    <div className="h-8 w-8 rounded-full bg-[var(--color-gold)]/20 flex items-center justify-center border border-[var(--color-gold)]/30">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B5CF6]/50 to-[#F59E0B]/50 blur-sm pointer-events-none" />
+                <div className="relative bg-[#0a0a0f] rounded-2xl p-6 border border-white/10 backdrop-blur-2xl">
+                  <div className="flex items-center gap-3 mb-6 text-[#FDE68A]">
+                    <div className="h-8 w-8 rounded-full bg-[#F59E0B]/20 flex items-center justify-center border border-[#F59E0B]/30">
                       <Check className="h-4 w-4" />
                     </div>
                     <span className="font-display font-bold tracking-wide">
@@ -255,7 +255,7 @@ export default function GenerateBlinkPage() {
                 transition={{ delay: 0.2 }}
                 className="w-full relative"
               >
-                <div className="absolute -inset-10 bg-[var(--color-accent)]/10 blur-3xl rounded-full pointer-events-none" />
+                <div className="absolute -inset-10 bg-[#8B5CF6]/10 blur-3xl rounded-full pointer-events-none" />
 
                 <div className="relative aspect-square w-full max-w-[240px] mx-auto bg-white rounded-2xl p-2 mb-8 shadow-[0_0_40px_rgba(139,92,246,0.3)] overflow-hidden">
                   <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none" />

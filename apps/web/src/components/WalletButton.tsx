@@ -34,7 +34,7 @@ export default function WalletButton() {
           onClick={() => setIsOpen(!isOpen)}
           className="glass-card inline-flex items-center gap-2 rounded-full pl-2 pr-4 py-1.5 text-white hover:bg-white/5 transition-all border border-white/5 cursor-pointer"
         >
-          <div className="h-7 w-7 rounded-full bg-gradient-to-tr from-[var(--color-accent)] to-[var(--color-gold)] p-px">
+          <div className="h-7 w-7 rounded-full bg-gradient-to-tr from-[#8B5CF6] to-[#F59E0B] p-px">
             <div className="w-full h-full bg-black rounded-full flex items-center justify-center text-xs font-bold text-white">
               {initial}
             </div>
@@ -64,7 +64,7 @@ export default function WalletButton() {
                 filter: "blur(10px)",
               }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute right-0 mt-3 w-56 rounded-2xl border border-white/10 bg-[var(--color-bg-surface)]/95 backdrop-blur-xl p-2 shadow-2xl z-50"
+              className="absolute right-0 mt-3 w-56 rounded-2xl border border-white/10 bg-[#0a0a0f]/95 backdrop-blur-xl p-2 shadow-2xl z-50"
             >
               <div className="px-3 py-3 text-xs text-zinc-500 font-[var(--font-mono)] border-b border-white/5 mb-2 uppercase tracking-widest flex items-center justify-between">
                 Status
@@ -75,7 +75,7 @@ export default function WalletButton() {
                 onClick={() => setIsOpen(false)}
                 className="w-full flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-zinc-200 hover:bg-white/5 hover:text-white transition-all no-underline"
               >
-                <User className="h-4 w-4 text-[var(--color-accent)]" /> My
+                <User className="h-4 w-4 text-[#8B5CF6]" /> My
                 Profile
               </Link>
               <button
@@ -96,7 +96,7 @@ export default function WalletButton() {
 
   return (
     <button
-      className="relative overflow-hidden inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[#6c5ce7] text-white h-11 px-6 text-xs font-medium font-[var(--font-mono)] uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] border border-white/10 disabled:opacity-50 cursor-pointer group"
+      className="relative overflow-hidden inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#6c5ce7] text-white h-11 px-6 text-xs font-medium font-[var(--font-mono)] uppercase tracking-wider transition-all shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] border border-white/10 disabled:opacity-50 cursor-pointer group"
       onClick={() => setVisible(true)}
       disabled={connecting}
     >

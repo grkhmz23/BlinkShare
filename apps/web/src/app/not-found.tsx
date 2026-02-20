@@ -7,7 +7,7 @@ export default function NotFound() {
       <div className="relative z-10 flex flex-col items-center">
         <h1 className="text-[10rem] font-display font-black leading-none text-transparent bg-clip-text bg-gradient-to-b from-white/20 to-transparent mb-4 select-none relative">
           404
-          <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-base)] to-transparent z-10" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030305] to-transparent z-10" />
         </h1>
         <h2 className="text-2xl font-display uppercase tracking-widest text-zinc-300 mb-4 z-20">
           Anomaly Detected

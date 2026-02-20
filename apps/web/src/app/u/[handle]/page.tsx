@@ -55,7 +55,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
     <div className="max-w-6xl mx-auto px-6 py-20 min-h-[calc(100vh-80px)]">
       {/* Profile header card */}
       <div className="relative mb-12">
-        <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-[var(--color-accent)]/10 to-transparent -z-10 rounded-3xl" />
+        <div className="absolute top-0 left-0 w-full h-64 bg-gradient-to-b from-[#8B5CF6]/10 to-transparent -z-10 rounded-3xl" />
 
         <div className="glass-card rounded-2xl p-10 md:p-14 border border-white/5 relative overflow-hidden animate-in">
           {/* Dot grid background */}
@@ -69,10 +69,10 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
           <div className="flex flex-col md:flex-row items-center md:items-start gap-10 relative z-10">
             {/* Avatar with spinning aura */}
             <div className="relative">
-              <div className="absolute -inset-4 rounded-full border border-[var(--color-accent)]/30 border-t-[var(--color-gold)]/50 animate-[spin_8s_linear_infinite] opacity-50" />
-              <div className="absolute -inset-2 rounded-full border border-[var(--color-gold)]/20 border-b-[var(--color-accent)]/50 animate-[spin_6s_linear_infinite_reverse] opacity-50" />
+              <div className="absolute -inset-4 rounded-full border border-[#8B5CF6]/30 border-t-[#F59E0B]/50 animate-[spin_8s_linear_infinite] opacity-50" />
+              <div className="absolute -inset-2 rounded-full border border-[#F59E0B]/20 border-b-[#8B5CF6]/50 animate-[spin_6s_linear_infinite_reverse] opacity-50" />
 
-              <div className="w-36 h-36 rounded-full bg-[var(--color-bg-surface)] border-4 border-[#1a1a24] overflow-hidden flex items-center justify-center relative z-10 shadow-[0_0_30px_rgba(0,0,0,0.8)]">
+              <div className="w-36 h-36 rounded-full bg-[#0a0a0f] border-4 border-[#1a1a24] overflow-hidden flex items-center justify-center relative z-10 shadow-[0_0_30px_rgba(0,0,0,0.8)]">
                 <span className="text-6xl font-display font-bold text-gradient-gold uppercase">
                   {initial}
                 </span>
@@ -136,7 +136,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
         <div className="lg:col-span-1 space-y-6">
           <div className="glass-card rounded-2xl p-6 border border-white/5 animate-in">
             <h3 className="text-sm font-display font-bold uppercase tracking-widest mb-6 flex items-center gap-3 text-zinc-300">
-              <Share2 className="h-4 w-4 text-[var(--color-accent)]" />{" "}
+              <Share2 className="h-4 w-4 text-[#8B5CF6]" />{" "}
               Broadcast Node
             </h3>
             <div className="space-y-4">
@@ -144,7 +144,7 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                 href={`/generate?profile=${encodeURIComponent(profile.username ?? profile.id)}&action=endorse`}
                 className="no-underline block"
               >
-                <div className="relative overflow-hidden inline-flex items-center justify-between w-full rounded-xl bg-gradient-to-r from-[var(--color-accent)] to-[#6c5ce7] text-white h-12 px-6 text-xs font-medium uppercase tracking-widest transition-all shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] border border-white/10 group">
+                <div className="relative overflow-hidden inline-flex items-center justify-between w-full rounded-xl bg-gradient-to-r from-[#8B5CF6] to-[#6c5ce7] text-white h-12 px-6 text-xs font-medium uppercase tracking-widest transition-all shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] border border-white/10 group">
                   <span className="relative z-10">Generate Blink</span>
                   <ArrowRight className="h-4 w-4 opacity-70 relative z-10" />
                   <div className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent group-hover:animate-[shimmer_1.5s_infinite] pointer-events-none" />
@@ -185,11 +185,11 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
               {profile.endorsementsReceived.map((e, i) => (
                 <div
                   key={e.id}
-                  className="relative group overflow-hidden rounded-xl bg-white/[0.02] border border-white/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:bg-white/[0.04] hover:border-[var(--color-accent)]/30 transition-all duration-300 animate-in"
+                  className="relative group overflow-hidden rounded-xl bg-white/[0.02] border border-white/5 p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:bg-white/[0.04] hover:border-[#8B5CF6]/30 transition-all duration-300 animate-in"
                   style={{ animationDelay: `${i * 0.05}s` }}
                 >
                   {/* Hover gradient line */}
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[var(--color-accent)] to-[var(--color-gold)] opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#8B5CF6] to-[#F59E0B] opacity-0 group-hover:opacity-100 transition-opacity" />
 
                   <div className="flex items-center gap-4 pl-2">
                     <div className="w-10 h-10 rounded-lg bg-black/50 border border-white/5 flex items-center justify-center text-xs font-[var(--font-mono)] font-bold text-zinc-400 group-hover:text-white transition-colors shadow-inner">
@@ -206,8 +206,8 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
                   </div>
                   <div className="flex items-center gap-4 pl-2 sm:pl-0">
                     <div className="flex flex-col items-end">
-                      <span className="text-xs font-[var(--font-mono)] text-[var(--color-gold)] drop-shadow-[0_0_5px_rgba(245,158,11,0.5)]">
-                        Verified
+                      <span className="text-xs font-[var(--font-mono)] text-[#F59E0B] drop-shadow-[0_0_5px_rgba(245,158,11,0.5)]">
+                        +10 KRM
                       </span>
                       <span className="text-[10px] text-zinc-600 font-[var(--font-mono)] mt-1">
                         {new Date(e.createdAt).toLocaleDateString()}

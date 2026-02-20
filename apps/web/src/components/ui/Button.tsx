@@ -15,7 +15,7 @@ const variantStyles: Record<Variant, string> = {
   primary:
     "bg-white text-black hover:bg-zinc-200 shadow-[0_0_20px_rgba(255,255,255,0.15)]",
   luxury:
-    "bg-gradient-to-r from-[var(--color-accent)] to-[#6c5ce7] text-white shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] border border-white/10",
+    "bg-gradient-to-r from-[#8B5CF6] to-[#6c5ce7] text-white shadow-[0_0_30px_rgba(139,92,246,0.3)] hover:shadow-[0_0_40px_rgba(139,92,246,0.5)] border border-white/10",
   secondary: "glass-card text-white hover:bg-white/5 border border-white/5",
   ghost: "text-zinc-400 hover:text-white hover:bg-white/5",
   outline: "border border-white/10 text-white hover:bg-white/5",

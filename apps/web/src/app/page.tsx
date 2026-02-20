@@ -17,7 +17,7 @@ export default function HomePage() {
   return (
     <div className="relative min-h-[calc(100vh-80px)] flex flex-col items-center justify-center px-6 overflow-hidden pt-20 pb-32">
       {/* Background glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-gold)]/10 rounded-full blur-[100px] -z-10 mix-blend-screen opacity-50" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-br from-[#8B5CF6]/20 to-[#F59E0B]/10 rounded-full blur-[100px] -z-10 mix-blend-screen opacity-50" />
 
       <div className="max-w-5xl mx-auto text-center w-full z-10">
         <motion.div
@@ -29,7 +29,7 @@ export default function HomePage() {
             glow
             className="mb-8 px-4 py-1.5 uppercase tracking-widest gap-2"
           >
-            <div className="w-2 h-2 rounded-full bg-[var(--color-accent)] animate-pulse" />
+            <div className="w-2 h-2 rounded-full bg-[#8B5CF6] animate-pulse" />
             Protocol Live on Solana
           </Badge>
 
@@ -56,23 +56,18 @@ export default function HomePage() {
                 Generate Blink <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>
-            <a
-              href="#stats"
-              className="w-full sm:w-auto no-underline"
+            <Button
+              variant="outline"
+              size="lg"
+              className="w-full sm:w-auto h-14 px-8 text-sm uppercase tracking-wider"
             >
-              <Button
-                variant="outline"
-                size="lg"
-                className="w-full sm:w-auto h-14 px-8 text-sm uppercase tracking-wider"
-              >
-                Explore Protocol
-              </Button>
-            </a>
+              Read Manifesto
+            </Button>
           </div>
         </motion.div>
 
         {/* 3D Stat Cards */}
-        <div id="stats" className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+        <div className="mt-32 grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {stats.map((stat) => (
             <motion.div
               key={stat.label}
@@ -82,13 +77,13 @@ export default function HomePage() {
             >
               <TiltCard className="text-left group cursor-default h-full">
                 <div className="flex justify-between items-start mb-8">
-                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-[var(--color-accent)]/50 transition-colors duration-500">
-                    <stat.icon className="h-5 w-5 text-zinc-400 group-hover:text-[var(--color-accent)] transition-colors" />
+                  <div className="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:border-[#8B5CF6]/50 transition-colors duration-500">
+                    <stat.icon className="h-5 w-5 text-zinc-400 group-hover:text-[#8B5CF6] transition-colors" />
                   </div>
-                  <Sparkles className="h-4 w-4 text-white/10 group-hover:text-[var(--color-gold)]/50 transition-colors" />
+                  <Sparkles className="h-4 w-4 text-white/10 group-hover:text-[#F59E0B]/50 transition-colors" />
                 </div>
                 <div>
-                  <h4 className="text-4xl font-display font-bold text-white mb-2 tracking-tight">
+                  <h4 className="text-4xl font-display font-bold text-white mb-2 tracking-tight group-hover:text-gradient transition-all duration-500">
                     {stat.value}
                   </h4>
                   <p className="text-xs text-zinc-500 uppercase tracking-widest font-[var(--font-mono)]">

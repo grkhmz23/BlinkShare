@@ -10,6 +10,7 @@ import WalletButton from "./WalletButton";
 const navLinks = [
   { name: "Core", path: "/" },
   { name: "Synthesize", path: "/generate" },
+  { name: "Registry", path: "/u/toly" },
 ];
 
 export default function Navbar() {
@@ -21,8 +22,8 @@ export default function Navbar() {
       <div className="mx-auto max-w-7xl px-6 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group no-underline">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[var(--color-accent)] to-[var(--color-gold)] p-px shadow-[0_0_20px_rgba(139,92,246,0.3)] group-hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] transition-all duration-500">
-            <div className="w-full h-full bg-[var(--color-bg-surface)] rounded-xl flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#8B5CF6] to-[#F59E0B] p-px shadow-[0_0_20px_rgba(139,92,246,0.3)] group-hover:shadow-[0_0_30px_rgba(139,92,246,0.5)] transition-all duration-500">
+            <div className="w-full h-full bg-[#0a0a0f] rounded-xl flex items-center justify-center">
               <Zap className="h-5 w-5 text-white" fill="currentColor" />
             </div>
           </div>
@@ -57,13 +58,13 @@ export default function Navbar() {
           >
             <div className="space-y-1.5">
               <span
-                className={`block w-5 h-px bg-current transition-transform ${mobileMenuOpen ? "rotate-45 translate-y-[3.5px]" : ""}`}
+                className={`block w-5 h-px bg-current transition-transform ${mobileMenuOpen ? "rotate-45 translate-y-2" : ""}`}
               />
               <span
                 className={`block w-5 h-px bg-current transition-opacity ${mobileMenuOpen ? "opacity-0" : ""}`}
               />
               <span
-                className={`block w-5 h-px bg-current transition-transform ${mobileMenuOpen ? "-rotate-45 -translate-y-[3.5px]" : ""}`}
+                className={`block w-5 h-px bg-current transition-transform ${mobileMenuOpen ? "-rotate-45 -translate-y-1.5" : ""}`}
               />
             </div>
           </button>
@@ -77,7 +78,7 @@ export default function Navbar() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            className="md:hidden overflow-hidden border-b border-white/5 bg-[var(--color-bg-base)]/95 backdrop-blur-xl"
+            className="md:hidden overflow-hidden border-b border-white/5 bg-[#030305]/95 backdrop-blur-xl"
           >
             <div className="px-6 py-6 flex flex-col gap-4">
               {navLinks.map((link) => (

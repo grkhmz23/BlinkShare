@@ -62,11 +62,11 @@ export default function TiltCard({
       <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent opacity-50 pointer-events-none" />
       {glow && (
         <motion.div
-          className="absolute inset-0 -z-10 rounded-2xl bg-[var(--color-accent)] blur-xl"
+          className="absolute inset-0 -z-10 rounded-2xl bg-[#8B5CF6] blur-xl"
           style={{ opacity: shineOpacity }}
         />
       )}
-      <div className="relative h-full w-full rounded-2xl bg-[var(--color-bg-surface)]/90 p-6 backdrop-blur-md overflow-hidden flex flex-col">
+      <div className="relative h-full w-full rounded-2xl bg-[#0a0a0f]/90 p-6 backdrop-blur-md overflow-hidden flex flex-col">
         {children}
       </div>
     </motion.div>

@@ -91,7 +91,7 @@ export default function CreateProfileForm() {
     disconnected: (
       <div className="text-center py-10">
         <div className="mx-auto w-20 h-20 rounded-full border border-white/10 bg-gradient-to-b from-white/5 to-transparent flex items-center justify-center mb-6 relative">
-          <div className="absolute inset-0 rounded-full border border-[var(--color-accent)]/30 animate-[spin_4s_linear_infinite]" />
+          <div className="absolute inset-0 rounded-full border border-[#8B5CF6]/30 animate-[spin_4s_linear_infinite]" />
           <Wallet className="h-8 w-8 text-zinc-400" />
         </div>
         <h3 className="text-2xl font-display font-bold text-white mb-3">
@@ -113,12 +113,12 @@ export default function CreateProfileForm() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ repeat: Infinity, duration: 3, ease: "linear" }}
-            className="absolute inset-0 rounded-full border-t-2 border-r-2 border-[var(--color-accent)] opacity-50"
+            className="absolute inset-0 rounded-full border-t-2 border-r-2 border-[#8B5CF6] opacity-50"
           />
           <motion.div
             animate={{ rotate: -360 }}
             transition={{ repeat: Infinity, duration: 2, ease: "linear" }}
-            className="absolute inset-2 rounded-full border-b-2 border-l-2 border-[var(--color-gold)] opacity-50"
+            className="absolute inset-2 rounded-full border-b-2 border-l-2 border-[#F59E0B] opacity-50"
           />
           <Hexagon className="absolute inset-0 m-auto h-6 w-6 text-white/50" />
         </div>
@@ -130,7 +130,7 @@ export default function CreateProfileForm() {
 
     found: (
       <div className="text-center py-10">
-        <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-gold)]/20 flex items-center justify-center mb-6 relative">
+        <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-[#8B5CF6]/20 to-[#F59E0B]/20 flex items-center justify-center mb-6 relative">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -146,7 +146,7 @@ export default function CreateProfileForm() {
           Wallet linked to{" "}
           <Link
             href={`/u/${encodeURIComponent((state as { kind: "found"; username: string }).username)}`}
-            className="text-[var(--color-accent)]"
+            className="text-[#8B5CF6]"
           >
             @{(state as { kind: "found"; username: string }).username}
           </Link>
@@ -160,7 +160,7 @@ export default function CreateProfileForm() {
         animate={{ scale: 1, opacity: 1 }}
         className="text-center py-12"
       >
-        <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-[var(--color-accent)]/20 to-[var(--color-gold)]/20 flex items-center justify-center mb-6 relative">
+        <div className="mx-auto w-20 h-20 rounded-full bg-gradient-to-br from-[#8B5CF6]/20 to-[#F59E0B]/20 flex items-center justify-center mb-6 relative">
           <motion.div
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -186,7 +186,7 @@ export default function CreateProfileForm() {
 
     error: (
       <div className="text-center py-10">
-        <p className="text-[var(--color-danger)] text-sm font-[var(--font-mono)]">
+        <p className="text-[#e17055] text-sm font-[var(--font-mono)]">
           {(state as { kind: "error"; message: string }).message}
         </p>
       </div>
@@ -242,14 +242,14 @@ export default function CreateProfileForm() {
               Bio
             </label>
             <div className="relative group">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[var(--color-accent)]/20 to-[var(--color-gold)]/20 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500 blur" />
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#8B5CF6]/20 to-[#F59E0B]/20 rounded-xl opacity-0 group-hover:opacity-100 transition duration-500 blur" />
               <textarea
                 placeholder="Your story..."
                 value={bio}
                 onChange={(e) => setBio(e.target.value)}
                 maxLength={256}
                 rows={3}
-                className="relative w-full rounded-xl border border-white/10 bg-[var(--color-bg-surface)]/80 backdrop-blur-sm px-4 py-3 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-[var(--color-accent)]/50 transition-all resize-none"
+                className="relative w-full rounded-xl border border-white/10 bg-[#0a0a0f]/80 backdrop-blur-sm px-4 py-3 text-sm text-white placeholder:text-zinc-600 focus:outline-none focus:border-[#8B5CF6]/50 transition-all resize-none"
               />
             </div>
           </div>

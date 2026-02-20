@@ -36,7 +36,7 @@ export default function CopyBox({ value, label }: CopyBoxProps) {
           className="glass-card flex items-center rounded-lg px-4 text-zinc-400 hover:text-white transition-colors cursor-pointer border border-white/5"
         >
           {copied ? (
-            <Check className="h-4 w-4 text-[var(--color-success)]" />
+            <Check className="h-4 w-4 text-[#00b894]" />
           ) : (
             <Copy className="h-4 w-4" />
           )}

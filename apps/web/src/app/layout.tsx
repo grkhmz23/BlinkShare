@@ -29,10 +29,10 @@ export default function RootLayout({
         <ClientProviders>
           <Navbar />
           <main className="flex-1 relative z-10">{children}</main>
-          <footer className="border-t border-white/[0.03] bg-[var(--color-bg-base)] mt-auto relative z-10">
+          <footer className="border-t border-white/[0.03] bg-[#030305] mt-auto relative z-10">
             <div className="mx-auto max-w-7xl px-6 py-10 flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-[var(--font-mono)] uppercase tracking-widest text-zinc-600">
               <div className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-[var(--color-accent)] animate-pulse" />
+                <div className="w-1.5 h-1.5 rounded-full bg-[#8B5CF6] animate-pulse" />
                 BlinkShare Systems &copy; {new Date().getFullYear()}
               </div>
               <div className="flex gap-8">
