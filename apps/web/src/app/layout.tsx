@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import ClientProviders from "@/components/ClientProviders";
+import WalletButton from "@/components/WalletButton";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,33 +23,36 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <nav
-          style={{
-            borderBottom: "1px solid var(--border)",
-            padding: "16px 0",
-          }}
-        >
-          <div className="container flex items-center justify-between">
-            <a
-              href="/"
-              className="mono"
-              style={{
-                fontSize: 20,
-                fontWeight: 700,
-                color: "var(--text)",
-                letterSpacing: "-0.5px",
-              }}
-            >
-              BlinkShare
-            </a>
-            <div className="flex gap-4 items-center">
-              <a href="/generate" className="btn btn-primary" style={{ fontSize: 13, padding: "8px 16px" }}>
-                Generate Blink
+        <ClientProviders>
+          <nav
+            style={{
+              borderBottom: "1px solid var(--border)",
+              padding: "16px 0",
+            }}
+          >
+            <div className="container flex items-center justify-between">
+              <a
+                href="/"
+                className="mono"
+                style={{
+                  fontSize: 20,
+                  fontWeight: 700,
+                  color: "var(--text)",
+                  letterSpacing: "-0.5px",
+                }}
+              >
+                BlinkShare
               </a>
+              <div className="flex gap-4 items-center">
+                <a href="/generate" className="btn btn-primary" style={{ fontSize: 13, padding: "8px 16px" }}>
+                  Generate Blink
+                </a>
+                <WalletButton />
+              </div>
             </div>
-          </div>
-        </nav>
-        <main>{children}</main>
+          </nav>
+          <main>{children}</main>
+        </ClientProviders>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { env } from "@/lib/env";
 import { notFound } from "next/navigation";
+import ProfileOwnerBadge from "@/components/ProfileOwnerBadge";
 
 interface ProfilePageProps {
   params: Promise<{ handle: string }>;
@@ -66,7 +67,12 @@ export default async function ProfilePage({ params }: ProfilePageProps) {
             {(displayName)[0]?.toUpperCase() ?? "?"}
           </div>
           <div>
-            <h1 style={{ fontSize: 24, fontWeight: 700 }}>{displayName}</h1>
+            <div className="flex items-center">
+              <h1 style={{ fontSize: 24, fontWeight: 700 }}>{displayName}</h1>
+              {profile.walletAddress && (
+                <ProfileOwnerBadge profileWalletAddress={profile.walletAddress} />
+              )}
+            </div>
             {shortWallet && (
               <p className="mono text-muted" style={{ fontSize: 13, marginTop: 2 }}>
                 {shortWallet}

@@ -1,6 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
+
+const CreateProfileForm = dynamic(
+  () => import("@/components/CreateProfileForm"),
+  { ssr: false }
+);
 
 export default function GenerateBlinkPage() {
   const [profileId, setProfileId] = useState("");
@@ -63,6 +69,8 @@ export default function GenerateBlinkPage() {
         <p className="text-muted animate-in" style={{ fontSize: 14, marginBottom: 32 }}>
           Create a shareable Solana Action link that anyone can use to endorse a profile.
         </p>
+
+        <CreateProfileForm />
 
         <div className="card animate-in">
           <label style={{ fontSize: 13, fontWeight: 600, marginBottom: 8, display: "block" }}>

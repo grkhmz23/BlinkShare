@@ -1,14 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { createProfile as tapestryCreateProfile } from "@/lib/tapestry";
-
-const CreateProfileSchema = z.object({
-  walletAddress: z.string().min(32).max(44),
-  username: z.string().min(1).max(32).optional(),
-  displayName: z.string().max(64).optional(),
-  bio: z.string().max(256).optional(),
-});
+import { CreateProfileSchema } from "@/lib/schemas";
 
 export async function POST(req: NextRequest) {
   try {
