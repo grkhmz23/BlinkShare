@@ -1,6 +1,7 @@
 "use client";
 
 import { useWallet } from "@solana/wallet-adapter-react";
+import { Shield } from "lucide-react";
 
 export default function ProfileOwnerBadge({
   profileWalletAddress,
@@ -13,17 +14,12 @@ export default function ProfileOwnerBadge({
   if (publicKey.toBase58() !== profileWalletAddress) return null;
 
   return (
-    <span
-      className="badge"
-      style={{
-        background: "rgba(108, 92, 231, 0.15)",
-        color: "var(--accent)",
-        border: "1px solid rgba(108, 92, 231, 0.3)",
-        fontSize: 12,
-        marginLeft: 8,
-      }}
-    >
-      Your Profile
-    </span>
+    <div className="ml-3">
+      <div className="bg-[var(--color-bg-surface)] rounded-full p-1">
+        <div className="bg-gradient-to-r from-[var(--color-accent)] to-[var(--color-gold)] p-2 rounded-full shadow-[0_0_15px_rgba(245,158,11,0.5)]">
+          <Shield className="h-4 w-4 text-white fill-white" />
+        </div>
+      </div>
+    </div>
   );
 }

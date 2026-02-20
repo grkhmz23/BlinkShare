@@ -2,17 +2,28 @@
 
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import Link from "next/link";
+import { AnimatePresence, motion } from "framer-motion";
+import { Search, Copy, Check, QrCode, Zap } from "lucide-react";
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import Toast from "@/components/ui/Toast";
+import TiltCard from "@/components/ui/TiltCard";
+import Badge from "@/components/ui/Badge";
 
 const CreateProfileForm = dynamic(
   () => import("@/components/CreateProfileForm"),
-  { ssr: false }
+  { ssr: false },
 );
 
 export default function GenerateBlinkPage() {
   const [profileId, setProfileId] = useState("");
-  const [actionType, setActionType] = useState<"endorse" | "follow" | "tip">("endorse");
+  const [actionType, setActionType] = useState<"endorse" | "follow" | "tip">(
+    "endorse",
+  );
   const [generated, setGenerated] = useState(false);
-  const [copied, setCopied] = useState(false);
+  const [toastMsg, setToastMsg] = useState("");
+  const [showToast, setShowToast] = useState(false);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
 
   // Read query params on mount
@@ -27,9 +38,10 @@ export default function GenerateBlinkPage() {
     if (profile) setGenerated(true);
   }, []);
 
-  const appUrl = typeof window !== "undefined"
-    ? window.location.origin
-    : "http://localhost:3000";
+  const appUrl =
+    typeof window !== "undefined"
+      ? window.location.origin
+      : "http://localhost:3000";
 
   const actionUrl = `${appUrl}/api/actions/endorse?profile=${encodeURIComponent(profileId)}`;
   const blinkUrl = `https://dial.to/?action=solana-action:${encodeURIComponent(actionUrl)}`;
@@ -43,203 +55,256 @@ export default function GenerateBlinkPage() {
       QRCode.toDataURL(blinkUrl, {
         width: 256,
         margin: 2,
-        color: { dark: "#e4e4f0", light: "#12121a" },
+        color: { dark: "#e4e4f0", light: "#0a0a0f" },
       }).then((url: string) => {
         if (!cancelled) setQrDataUrl(url);
       });
     });
-    return () => { cancelled = true; };
+    return () => {
+      cancelled = true;
+    };
   }, [generated, profileId, blinkUrl]);
 
-  const handleCopy = async (text: string) => {
+  const handleCopy = async (text: string, label: string) => {
     await navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setToastMsg(`${label} copied to clipboard`);
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
   };
 
+  const tabs = [
+    { id: "endorse" as const, label: "Endorse" },
+    { id: "follow" as const, label: "Follow" },
+    { id: "tip" as const, label: "Tip" },
+  ];
+
   return (
-    <div className="container" style={{ paddingTop: 48, paddingBottom: 80 }}>
-      <div style={{ maxWidth: 560, margin: "0 auto" }}>
-        <h1
-          className="mono animate-in"
-          style={{ fontSize: 28, fontWeight: 700, marginBottom: 8 }}
-        >
-          Generate a Blink
+    <div className="max-w-5xl mx-auto px-6 py-24 min-h-[calc(100vh-80px)]">
+      <Toast message={toastMsg} isVisible={showToast} />
+
+      <motion.div
+        initial={{ opacity: 0, filter: "blur(10px)" }}
+        animate={{ opacity: 1, filter: "blur(0px)" }}
+        className="mb-12 text-center md:text-left"
+      >
+        <h1 className="text-4xl md:text-5xl font-display font-bold mb-4">
+          Command Center
         </h1>
-        <p className="text-muted animate-in" style={{ fontSize: 14, marginBottom: 32 }}>
-          Create a shareable Solana Action link that anyone can use to endorse a profile.
+        <p className="text-zinc-400 font-light text-lg">
+          Deploy interactive Solana Actions directly to any feed.
         </p>
+      </motion.div>
 
-        <CreateProfileForm />
+      <CreateProfileForm />
 
-        <div className="card animate-in">
-          <label style={{ fontSize: 13, fontWeight: 600, marginBottom: 8, display: "block" }}>
-            Profile ID or Username
-          </label>
-          <input
-            type="text"
-            placeholder="e.g. alice or wallet address"
-            value={profileId}
-            onChange={(e) => {
-              setProfileId(e.target.value);
-              setGenerated(false);
-            }}
-          />
-
-          <label
-            style={{
-              fontSize: 13,
-              fontWeight: 600,
-              marginBottom: 8,
-              marginTop: 20,
-              display: "block",
-            }}
-          >
-            Action Type
-          </label>
-          <div className="flex gap-2">
-            {(["endorse", "follow", "tip"] as const).map((type) => (
-              <button
-                key={type}
-                className={`btn ${actionType === type ? "btn-primary" : "btn-secondary"}`}
-                style={{ fontSize: 13, padding: "8px 16px", textTransform: "capitalize" }}
-                onClick={() => {
-                  setActionType(type);
-                  setGenerated(false);
-                }}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
-
-          {actionType !== "endorse" && (
-            <p
-              className="text-muted mt-4"
-              style={{ fontSize: 12, fontStyle: "italic" }}
-            >
-              {actionType === "follow" ? "Follow" : "Tip"} blinks are coming soon. For now, the endorse action is fully functional.
-            </p>
-          )}
-
-          <button
-            className="btn btn-primary mt-6"
-            style={{ width: "100%" }}
-            onClick={() => {
-              if (profileId.trim()) setGenerated(true);
-            }}
-            disabled={!profileId.trim()}
-          >
-            Generate Blink
-          </button>
-        </div>
-
-        {generated && profileId.trim() && (
-          <div className="card animate-in mt-6">
-            <h3 style={{ fontSize: 16, fontWeight: 600, marginBottom: 16 }}>
-              Your Blink is ready
-            </h3>
-
-            <label style={{ fontSize: 12, fontWeight: 600, color: "var(--text-muted)", marginBottom: 6, display: "block" }}>
-              Action URL (for Blink clients)
-            </label>
-            <div
-              className="copy-box"
-              onClick={() => handleCopy(actionUrl)}
-              title="Click to copy"
-            >
-              {actionUrl}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* Main controls — 7 cols */}
+        <div className="lg:col-span-7 space-y-6">
+          <TiltCard>
+            <div className="mb-8">
+              <label className="text-xs uppercase tracking-widest font-[var(--font-mono)] text-zinc-400 mb-2 block">
+                Action Paradigm
+              </label>
+              <div className="flex p-1.5 bg-[var(--color-bg-base)] rounded-xl border border-white/5">
+                {tabs.map((tab) => (
+                  <button
+                    key={tab.id}
+                    onClick={() => {
+                      setActionType(tab.id);
+                      setGenerated(false);
+                    }}
+                    className={`flex-1 py-3 text-sm font-bold uppercase tracking-wider rounded-lg transition-all duration-300 cursor-pointer ${
+                      actionType === tab.id
+                        ? "bg-white/10 text-white shadow-md border border-white/10"
+                        : "text-zinc-600 hover:text-zinc-300"
+                    }`}
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
             </div>
 
-            <label
-              style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: "var(--text-muted)",
-                marginBottom: 6,
-                marginTop: 16,
-                display: "block",
-              }}
-            >
-              Blink Inspector / Share URL
-            </label>
-            <div
-              className="copy-box"
-              onClick={() => handleCopy(blinkUrl)}
-              title="Click to copy"
-            >
-              {blinkUrl}
-            </div>
-
-            <label
-              style={{
-                fontSize: 12,
-                fontWeight: 600,
-                color: "var(--text-muted)",
-                marginBottom: 6,
-                marginTop: 16,
-                display: "block",
-              }}
-            >
-              Profile Page
-            </label>
-            <div
-              className="copy-box"
-              onClick={() => handleCopy(profileUrl)}
-              title="Click to copy"
-            >
-              {profileUrl}
-            </div>
-
-            {copied && (
-              <p style={{ color: "var(--success)", fontSize: 12, marginTop: 8 }}>
-                Copied to clipboard!
+            {actionType !== "endorse" && (
+              <p className="text-zinc-600 text-xs italic mb-4 font-[var(--font-mono)]">
+                {actionType === "follow" ? "Follow" : "Tip"} blinks are coming
+                soon. Endorse is fully functional.
               </p>
             )}
 
-            {qrDataUrl && (
-              <div className="text-center mt-6">
-                <p
-                  style={{
-                    fontSize: 12,
-                    fontWeight: 600,
-                    color: "var(--text-muted)",
-                    marginBottom: 12,
-                  }}
-                >
-                  QR Code
-                </p>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={qrDataUrl}
-                  alt="Blink QR Code"
-                  width={200}
-                  height={200}
-                  style={{ borderRadius: 8, margin: "0 auto", display: "block" }}
+            <div className="space-y-6 mb-10">
+              <div>
+                <label className="text-xs uppercase tracking-widest font-[var(--font-mono)] text-zinc-400 mb-2 block">
+                  Target Namespace
+                </label>
+                <div className="relative">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-500 z-10" />
+                  <Input
+                    placeholder="Search user to interact with..."
+                    value={profileId}
+                    onChange={(e) => {
+                      setProfileId(e.target.value);
+                      setGenerated(false);
+                    }}
+                    className="pl-12 h-14 text-lg"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <Button
+              className="w-full h-14 text-sm tracking-widest uppercase font-bold"
+              variant="luxury"
+              onClick={() => {
+                if (profileId.trim()) setGenerated(true);
+              }}
+              disabled={!profileId.trim()}
+            >
+              Synthesize Blink
+            </Button>
+          </TiltCard>
+
+          {/* Results */}
+          <AnimatePresence>
+            {generated && profileId.trim() && (
+              <motion.div
+                initial={{ opacity: 0, height: 0, scale: 0.95 }}
+                animate={{ opacity: 1, height: "auto", scale: 1 }}
+                className="relative rounded-2xl p-px overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-accent)]/50 to-[var(--color-gold)]/50 blur-sm pointer-events-none" />
+                <div className="relative bg-[var(--color-bg-surface)] rounded-2xl p-6 border border-white/10 backdrop-blur-2xl">
+                  <div className="flex items-center gap-3 mb-6 text-[var(--color-gold-light)]">
+                    <div className="h-8 w-8 rounded-full bg-[var(--color-gold)]/20 flex items-center justify-center border border-[var(--color-gold)]/30">
+                      <Check className="h-4 w-4" />
+                    </div>
+                    <span className="font-display font-bold tracking-wide">
+                      Synthesis Complete
+                    </span>
+                  </div>
+
+                  <div className="space-y-5">
+                    {[
+                      { label: "Payload URI", value: actionUrl },
+                      { label: "Inspector Link", value: blinkUrl },
+                      { label: "Profile Path", value: profileUrl },
+                    ].map((item) => (
+                      <div key={item.label}>
+                        <span className="text-[10px] uppercase tracking-widest font-[var(--font-mono)] text-zinc-400 mb-1.5 block">
+                          {item.label}
+                        </span>
+                        <div className="flex gap-2">
+                          <input
+                            readOnly
+                            value={item.value}
+                            className="flex-1 bg-black/50 border border-white/5 rounded-lg px-3 py-2 font-[var(--font-mono)] text-xs text-zinc-400 focus:outline-none"
+                          />
+                          <button
+                            onClick={() =>
+                              handleCopy(item.value, item.label)
+                            }
+                            className="glass-card flex items-center rounded-lg px-3 py-2 text-zinc-400 hover:text-white transition-colors cursor-pointer border border-white/5"
+                          >
+                            <Copy className="h-4 w-4" />
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="flex gap-3 mt-8">
+                    <a
+                      href={blinkUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 no-underline"
+                    >
+                      <Button
+                        variant="outline"
+                        className="w-full text-xs tracking-wider"
+                      >
+                        Open Inspector
+                      </Button>
+                    </a>
+                    <Link
+                      href={`/u/${encodeURIComponent(profileId)}`}
+                      className="flex-1 no-underline"
+                    >
+                      <Button className="w-full text-xs tracking-wider">
+                        View Profile
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* QR Code sidebar — 5 cols */}
+        <div className="lg:col-span-5 h-full">
+          <TiltCard className="h-full min-h-[400px] flex flex-col items-center justify-center p-10">
+            {generated && profileId.trim() ? (
+              <motion.div
+                initial={{
+                  scale: 0.8,
+                  opacity: 0,
+                  filter: "blur(10px)",
+                }}
+                animate={{ scale: 1, opacity: 1, filter: "blur(0px)" }}
+                transition={{ delay: 0.2 }}
+                className="w-full relative"
+              >
+                <div className="absolute -inset-10 bg-[var(--color-accent)]/10 blur-3xl rounded-full pointer-events-none" />
+
+                <div className="relative aspect-square w-full max-w-[240px] mx-auto bg-white rounded-2xl p-2 mb-8 shadow-[0_0_40px_rgba(139,92,246,0.3)] overflow-hidden">
+                  <div className="absolute inset-0 bg-black/5 z-10 pointer-events-none" />
+                  <div className="scanner-line z-20" />
+                  <div className="w-full h-full border-4 border-black rounded-xl p-4 flex items-center justify-center relative">
+                    {qrDataUrl ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={qrDataUrl}
+                        alt="Blink QR Code"
+                        className="w-full h-full rounded-lg"
+                      />
+                    ) : (
+                      <QrCode
+                        className="w-full h-full text-black opacity-90"
+                        strokeWidth={0.5}
+                      />
+                    )}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="bg-white p-2 rounded-lg shadow-lg">
+                        <Zap className="h-6 w-6 text-black fill-black" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-center relative z-10">
+                  <Badge className="mb-3">Scan via Backpack/Phantom</Badge>
+                  <h4 className="font-display font-bold text-xl text-white mb-2 tracking-wide capitalize">
+                    {actionType} Node
+                  </h4>
+                  <p className="text-xs text-zinc-500 font-[var(--font-mono)]">
+                    Point wallet camera to interact instantly.
+                  </p>
+                </div>
+              </motion.div>
+            ) : (
+              <div className="opacity-30 flex flex-col items-center">
+                <QrCode
+                  className="w-24 h-24 mb-6 text-zinc-600"
+                  strokeWidth={1}
                 />
+                <p className="text-sm font-[var(--font-mono)] tracking-widest uppercase">
+                  Awaiting Synthesis
+                </p>
               </div>
             )}
-
-            <div className="flex gap-2 mt-6 flex-wrap">
-              <a
-                href={blinkUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn btn-primary"
-                style={{ fontSize: 13, padding: "8px 16px" }}
-              >
-                Open in Blinks Inspector
-              </a>
-              <a
-                href={profileUrl}
-                className="btn btn-secondary"
-                style={{ fontSize: 13, padding: "8px 16px" }}
-              >
-                View Profile
-              </a>
-            </div>
-          </div>
-        )}
+          </TiltCard>
+        </div>
       </div>
     </div>
   );
